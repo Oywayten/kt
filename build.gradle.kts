@@ -18,7 +18,6 @@ dependencies {
 
 tasks.test {
     useJUnitPlatform()
-    jvmArgs("-Djunit.jupiter.execution.parallel.enabled=true")
 }
 
 
