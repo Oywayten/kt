@@ -1,26 +1,19 @@
 package vitaliy.grab
 
-fun add(first : Int, second : Int) : Int {
+fun add(first: Int, second: Int): Int {
     return first + second
 }
 
-fun subtract(first : Int, second : Int) : Int {
+fun subtract(first: Int, second: Int): Int {
     return first - second
 }
 
-fun divide(first: Int, second: Int) = first / second
-fun multiply(first: Int, second: Int) = first * second
+fun divide(first: Int, second: Int): Int = first / second
+fun multiply(first: Int, second: Int): Int = first * second
 
-fun main() {
-    val plus = add(1, 1)
-    println("1 + 1 = $plus")
+fun max(first: Int, second: Int): Int = if (first >= second) first else second
 
-    val minus = subtract(1, 1)
-    println("1 - 1 = $minus")
-
-    val divide= divide(16, 8)
-    println("16 / 8 = $divide")
-
-    val multiply = multiply(3, 7)
-    println("3 * 7 = $multiply")
+fun max(first: Int, second: Int, third: Int): Int {
+    val max: Int = max(second, third)
+    return if (first > max) first else max
 }

@@ -3,14 +3,11 @@ package vitaliy.grab
 import org.assertj.core.api.Assertions.assertThat
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
-import org.junit.jupiter.api.parallel.Execution
-import org.junit.jupiter.api.parallel.ExecutionMode
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
 import org.junit.jupiter.params.provider.MethodSource
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-@Execution(ExecutionMode.CONCURRENT)
 @Suppress("unused")
 class CalcTest {
 
@@ -100,7 +97,6 @@ class CalcTest {
     @MethodSource
     fun whenMultiplyHasExpectedResult(first: Int, second: Int, expected: Int) {
         val actual = multiply(first, second)
-
         assertThat(actual).isEqualTo(expected)
     }
 
@@ -117,4 +113,58 @@ class CalcTest {
         )
     }
 
+    @Test
+    fun whenMax2HasNotExpectedResult() {
+        val actual = max(9, 3)
+        val expected = 3
+        assertThat(actual).isNotEqualTo(expected)
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    fun whenMax2HasExpectedResult(first: Int, second: Int, expected: Int) {
+        val actual = max(first, second)
+        assertThat(actual).isEqualTo(expected)
+    }
+
+    private fun whenMax2HasExpectedResult(): List<Arguments> {
+        return listOf(
+            Arguments.of(10, 2, 10),
+            Arguments.of(3, 7, 7),
+            Arguments.of(0, 2, 2),
+            Arguments.of(100, 100, 100),
+            Arguments.of(14, 7, 14),
+            Arguments.of(-0, 1, 1),
+            Arguments.of(-1, 3, 3),
+            Arguments.of(-4, 2, 2)
+        )
+    }
+
+    @Test
+    fun whenMax3HasNotExpectedResult() {
+        val actual = max(9, 3, 18)
+        val expected = 9
+        assertThat(actual).isNotEqualTo(expected)
+    }
+
+    @ParameterizedTest
+    @MethodSource
+    fun whenMax3HasExpectedResult(first: Int, second: Int, third: Int, expected: Int) {
+        val actual = max(first, second, third)
+
+        assertThat(actual).isEqualTo(expected)
+    }
+
+    private fun whenMax3HasExpectedResult(): List<Arguments> {
+        return listOf(
+            Arguments.of(10, 2, 100, 100),
+            Arguments.of(3, 7, 7, 7),
+            Arguments.of(100, 1, 2, 100),
+            Arguments.of(100, 100, 0, 100),
+            Arguments.of(14, 70, 39, 70),
+            Arguments.of(-0, 1, 11, 11),
+            Arguments.of(-1, 3, -3, 3),
+            Arguments.of(-4, 2, -22, 2)
+        )
+    }
 }
