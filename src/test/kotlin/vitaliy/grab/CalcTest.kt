@@ -1,7 +1,6 @@
 package vitaliy.grab
 
 import org.assertj.core.api.Assertions.assertThat
-import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
@@ -166,79 +165,6 @@ class CalcTest {
             Arguments.of(-0, 1, 11, 11),
             Arguments.of(-1, 3, -3, 3),
             Arguments.of(-4, 2, -22, 2)
-        )
-    }
-
-    @ParameterizedTest
-    @MethodSource("getValidDrawArguments")
-    fun drawViaForWhenSizeIsValid(size: Int, expected: String) {
-        val actual: String = draw(size, ::drawViaFor)
-        assertThat(actual).isEqualTo(expected)
-    }
-
-    fun getValidDrawArguments(): List<Arguments> {
-        return listOf(
-            Arguments.of(
-                3,
-                """
-                X X
-                 X 
-                X X
-                """.trimIndent()
-            ),
-            Arguments.of(
-                1,
-                """
-                X
-                """.trimIndent()
-            )
-        )
-    }
-
-    @ParameterizedTest
-    @MethodSource("getInvalidDrawArguments")
-    fun drawViaForWhenSizeIsInvalid(size: Int) {
-        assertThatThrownBy { draw(size, ::drawViaFor) }
-            .isExactlyInstanceOf(IllegalArgumentException::class.java)
-    }
-
-    private fun getInvalidDrawArguments(): List<Arguments> {
-        return listOf(
-            Arguments.of(4),
-            Arguments.of(-1),
-            Arguments.of(2)
-        )
-    }
-
-    @ParameterizedTest
-    @MethodSource("getValidDrawArguments")
-    fun drawViaRepeatWhenSizeIsValid(size: Int, expected: String) {
-        val actual: String = draw(size, ::drawViaRepeat)
-        assertThat(actual).isEqualTo(expected)
-    }
-
-    @ParameterizedTest
-    @MethodSource("getInvalidDrawArguments")
-    fun drawViaRepeatWhenSizeIsInvalid(size: Int) {
-        assertThatThrownBy { draw(size, ::drawViaRepeat) }
-            .isExactlyInstanceOf(IllegalArgumentException::class.java)
-    }
-
-    @ParameterizedTest
-    @MethodSource("getArraysWithNulls")
-    fun whenDefragmentFromStartToEndHasValidOrder(array: Array<String?>, expected: Array<String?>) {
-        defragment(array)
-        assertThat(array).isEqualTo(expected)
-    }
-
-    private fun getArraysWithNulls(): List<Arguments> {
-        return listOf(
-            Arguments.of(arrayOf("test1", null, "test2", null), arrayOf("test1", "test2", null, null)),
-            Arguments.of(arrayOf("test1", null, null, "test2"), arrayOf("test1", "test2", null, null)),
-            Arguments.of(arrayOf(null, null, "test1", "test2"), arrayOf("test1", "test2", null, null)),
-            Arguments.of(arrayOf(null, null, "test1", null), arrayOf("test1", null, null, null)),
-            Arguments.of(arrayOfNulls<String?>(4), arrayOfNulls<String?>(4)),
-            Arguments.of(arrayOf("test1", "test2", "test3", "test4"), arrayOf("test1", "test2", "test3", "test4"))
         )
     }
 

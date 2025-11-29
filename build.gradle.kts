@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "2.2.10"
+    id("io.gitlab.arturbosch.detekt") version "1.23.8"
 }
 
 group = "vitaliy.grab"
@@ -20,7 +21,22 @@ tasks.test {
     useJUnitPlatform()
 }
 
+tasks.withType<io.gitlab.arturbosch.detekt.Detekt> {
+    reports {
+        html.required.set(true)
+        xml.required.set(true)
+        txt.required.set(false)
+    }
+}
+
 
 kotlin {
     jvmToolchain(17)
+}
+
+detekt {
+    toolVersion = "1.23.8"
+    config.setFrom("$projectDir/config/detekt/detekt.yml")
+    buildUponDefaultConfig = true
+    allRules = false
 }
