@@ -1,20 +1,24 @@
 package vitaliy.grab
 
-fun add(first: Int, second: Int): Int {
-    return first + second
-}
+fun add(first: Int, second: Int): Int =
+    first + second
 
-fun subtract(first: Int, second: Int): Int {
-    return first - second
-}
+fun subtract(first: Int, second: Int): Int =
+    first - second
 
-fun divide(first: Int, second: Int): Int = first / second
+fun divide(first: Int, second: Int): Int =
+    first / second
 
-fun multiply(first: Int, second: Int): Int = first * second
+fun multiply(first: Int, second: Int): Int =
+    first * second
 
-fun max(first: Int, second: Int): Int = if (first >= second) first else second
+fun max(first: Int, second: Int): Int =
+    if (first >= second) first else second
 
-fun max(first: Int, second: Int, third: Int): Int {
-    val max: Int = max(second, third)
-    return if (first > max) first else max
+fun max(vararg values: Int): Int =
+    max(ints = values.toTypedArray())
+
+fun max(ints: Array<Int>): Int {
+    require(ints.isNotEmpty())
+    return ints.reduce { i, i2 -> max(i, i2) }
 }

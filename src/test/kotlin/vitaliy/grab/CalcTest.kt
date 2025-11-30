@@ -1,6 +1,7 @@
 package vitaliy.grab
 
 import org.assertj.core.api.Assertions.assertThat
+import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
@@ -147,24 +148,31 @@ class CalcTest {
         assertThat(actual).isNotEqualTo(expected)
     }
 
+    @Test
+    fun whenEmptyThenIllegalArgumentException() {
+        assertThatThrownBy { max() }
+            .isExactlyInstanceOf(IllegalArgumentException::class.java)
+    }
+
     @ParameterizedTest
     @MethodSource
-    fun whenMax3HasExpectedResult(first: Int, second: Int, third: Int, expected: Int) {
-        val actual = max(first, second, third)
-
+    fun whenMax3HasExpectedResult(ints: Array<Int>, expected: Int) {
+        val actual = max(ints)
         assertThat(actual).isEqualTo(expected)
     }
 
     private fun whenMax3HasExpectedResult(): List<Arguments> {
         return listOf(
-            Arguments.of(10, 2, 100, 100),
-            Arguments.of(3, 7, 7, 7),
-            Arguments.of(100, 1, 2, 100),
-            Arguments.of(100, 100, 0, 100),
-            Arguments.of(14, 70, 39, 70),
-            Arguments.of(-0, 1, 11, 11),
-            Arguments.of(-1, 3, -3, 3),
-            Arguments.of(-4, 2, -22, 2)
+            Arguments.of(arrayOf(10), 10),
+            Arguments.of(arrayOf(10, 2), 10),
+            Arguments.of(arrayOf(10, 2, 100), 100),
+            Arguments.of(arrayOf(3, 7, 7), 7),
+            Arguments.of(arrayOf(100, 1, 2), 100),
+            Arguments.of(arrayOf(100, 100, 0), 100),
+            Arguments.of(arrayOf(14, 70, 39), 70),
+            Arguments.of(arrayOf(-0, 1, 11), 11),
+            Arguments.of(arrayOf(-1, 3, -3), 3),
+            Arguments.of(arrayOf(-4, 2, -22), 2)
         )
     }
 
