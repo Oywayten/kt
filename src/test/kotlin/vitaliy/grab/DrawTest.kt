@@ -14,7 +14,7 @@ class DrawTest {
     @ParameterizedTest
     @MethodSource("getValidDrawArguments")
     fun drawViaForWhenSizeIsValid(size: Int, expected: String) {
-        val actual: String = draw(size, ::drawViaFor)
+        val actual: String = draw(size)
         assertThat(actual).isEqualTo(expected)
     }
 
@@ -40,7 +40,7 @@ class DrawTest {
     @ParameterizedTest
     @MethodSource("getInvalidDrawArguments")
     fun drawViaForWhenSizeIsInvalid(size: Int) {
-        assertThatThrownBy { draw(size, ::drawViaFor) }
+        assertThatThrownBy { draw(size) }
             .isExactlyInstanceOf(IllegalArgumentException::class.java)
     }
 
@@ -50,20 +50,6 @@ class DrawTest {
             Arguments.of(-1),
             Arguments.of(2)
         )
-    }
-
-    @ParameterizedTest
-    @MethodSource("getValidDrawArguments")
-    fun drawViaRepeatWhenSizeIsValid(size: Int, expected: String) {
-        val actual: String = draw(size, ::drawViaRepeat)
-        assertThat(actual).isEqualTo(expected)
-    }
-
-    @ParameterizedTest
-    @MethodSource("getInvalidDrawArguments")
-    fun drawViaRepeatWhenSizeIsInvalid(size: Int) {
-        assertThatThrownBy { draw(size, ::drawViaRepeat) }
-            .isExactlyInstanceOf(IllegalArgumentException::class.java)
     }
 
 }
