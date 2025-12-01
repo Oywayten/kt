@@ -1,26 +1,26 @@
 package vitaliy.grab
 
 fun defragment(array: Array<String?>) {
-    var pointer1 = 0
-    var pointer2 = 0
+    var first = 0
+    var second = 0
 
     fun swapIfNeed() {
-        if (array[pointer1] == null
-            && array[pointer2] != null
+        if (array[first] == null
+            && array[second] != null
         ) {
-            val tmp = array[pointer1]
-            array[pointer1] = array[pointer2]
-            array[pointer2] = tmp
+            val tmp = array[first]
+            array[first] = array[second]
+            array[second] = tmp
         }
     }
 
-    while (pointer2 < array.size) {
-        if (pointer2 <= pointer1
-            || array[pointer2] == null
+    while (second < array.size) {
+        if (second <= first
+            || array[second] == null
         ) {
-            pointer2++
-        } else if (array[pointer1] != null) {
-            pointer1++
+            second++
+        } else if (array[first] != null) {
+            first++
         } else {
             swapIfNeed()
         }
