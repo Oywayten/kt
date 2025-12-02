@@ -1,5 +1,5 @@
 plugins {
-    kotlin("jvm") version "2.2.10"
+    kotlin("jvm") version "2.2.20"
     id("io.gitlab.arturbosch.detekt") version "1.23.8"
 }
 
@@ -11,8 +11,6 @@ repositories {
 }
 
 dependencies {
-    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.7.1")
-
     testImplementation(kotlin("test"))
     testImplementation("org.junit.jupiter:junit-jupiter-engine:6.0.1")
     testImplementation("org.assertj:assertj-core:3.24.2")

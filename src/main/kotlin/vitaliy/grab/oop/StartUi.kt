@@ -1,57 +1,49 @@
 package vitaliy.grab.oop
 
-import java.util.Scanner
+import vitaliy.grab.oop.action.AddItemAction
+import vitaliy.grab.oop.action.ExitAction
+import vitaliy.grab.oop.action.GetAllItemsAction
+import vitaliy.grab.oop.action.MenuAction
+import kotlin.system.exitProcess
 
-private const val NOT_IMPLEMENTED = "Not implemented"
+class StartUi(val output: Output) {
 
-private const val INPUT_YOU_COMMAND_NUMBER_ = "Input you command number: "
-
-private const val EXIT = "EXIT"
-
-private const val INPUT_ITEM_NAME_ = "Input item name: "
-
-private const val GREETENG = """
-            Hello, select next command:
-                1 - add item
-                2 - show all items
-                3 - exit  
-            """
-
-private const val EXIT_COMMAND = 3
-
-object StartUi {
-    
-    private val sc: Scanner = Scanner(System.`in`)
-
-    fun init() {
-        var command = 0
-        while (command != EXIT_COMMAND) {
-            when (command) {
-                0 -> greeting()
-                1 -> addItem()
-                2 -> getAllItems()
-                else -> println(NOT_IMPLEMENTED)
+    fun init(input: Input, tracker: Store, actions: List<MenuAction>) {
+        var run = true
+        while (run) {
+            showMenu(actions)
+            val select = input.askInt("Select: ")
+            if (select < 0 || select >= actions.size) {
+                output.println("Wrong input, you can select: 0 .. " + (actions.size - 1))
+                continue
             }
 
-            print(INPUT_YOU_COMMAND_NUMBER_)
-            command = sc.nextInt()
+            val action = actions.get(select)
+            run = action.execute(input, tracker)
         }
 
-        sc.close()
-        println(EXIT)
+        exitProcess(0)
     }
 
-    private fun getAllItems() =
-        println(MemStore.getAll())
-
-
-    private fun addItem() {
-        print(INPUT_ITEM_NAME_)
-        val item: String = sc.next()
-        MemStore.add(item)
+    private fun showMenu(actions: List<MenuAction>) {
+        println("Menu")
+        for ((i, action) in actions.withIndex()) {
+            println("$i. ${action.description()}")
+        }
     }
 
-    private fun greeting() =
-        println(GREETENG.trimIndent())
+}
+
+fun main() {
+    val output: Output = ConsoleOutput()
+    val input: Input = ValidateInput(output, ConsoleInput())
+    val tracker = MemTracker()
+    val actions = listOf(
+        AddItemAction(output),
+        GetAllItemsAction(output),
+        ExitAction(output)
+    )
+
+    StartUi(output).init(input, tracker, actions)
 
 }

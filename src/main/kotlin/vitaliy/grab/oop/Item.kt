@@ -6,5 +6,5 @@ import java.util.UUID
 data class Item(
     var id: UUID = UUID.randomUUID(),
     var name: String,
-    var created: OffsetDateTime = OffsetDateTime.now(),
+    var created: OffsetDateTime = OffsetDateTime.now()
 )
