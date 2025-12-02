@@ -1,10 +1,10 @@
 package vitaliy.grab.oop
 
 import java.time.OffsetDateTime
+import java.util.UUID
 
 data class Item(
-    var id: Int = -1,
+    var id: UUID = UUID.randomUUID(),
     var name: String,
-    val created: OffsetDateTime = OffsetDateTime.now(),
-    val participates: MutableList<String> = mutableListOf()
+    var created: OffsetDateTime = OffsetDateTime.now(),
 )

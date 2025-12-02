@@ -1,45 +1,58 @@
 package vitaliy.grab.oop
 
-class MemTracker(var ids: Int = 1, val items: MutableList<Item> = mutableListOf()) : Store {
+import java.util.*
+
+class MemTracker : Store {
+
+    val items = hashMapOf<UUID, Item>()
+
     override fun add(item: Item): Item {
-        item.id = ids++
-        items.add(item)
-        return item
+        items[item.id] = item
+        val added = items[item.id]
+        require(added != null)
+        return added
     }
 
-    override fun replace(id: Int, item: Item): Boolean {
-        return execIfPresent(id) { index: Int ->
-            item.id = id
-            items[index] = item
+    override fun update(item: Item): Boolean {
+        val currentItem = items[item.id]
+
+        if (currentItem !is Item) {
+            return false
         }
+
+        if (currentItem.name != item.name) {
+            currentItem.name = item.name
+        }
+
+        if (currentItem.created.equals(item.created)) {
+            currentItem.created = item.created
+        }
+
+        return true
     }
 
-    fun execIfPresent(id: Int, exec: (Int) -> Unit): Boolean {
-        val index: Int = items.indexOfFirst { it.id == id }
-        return if (index == -1) {
-            false
-        } else {
-            exec(index)
-            true
-        }
-    }
 
-    override fun delete(id: Int): Boolean {
-        return execIfPresent(id) { index: Int ->
-            items.removeAt(index)
-            ids--
-        }
-    }
+    override fun delete(item: Item): Boolean =
+        items.remove(item.id, item)
+
 
     override fun findAll(): List<Item> {
-        return items.toList()
+        return items.values.toList()
     }
 
     override fun findByName(name: String): List<Item> {
-        return items.filter { it.name == name }
+        val list = arrayListOf<Item>()
+
+        for ((_, item ) in items) {
+            if (item.name == name) {
+                list.add(item)
+            }
+        }
+
+        return list
     }
 
-    override fun findById(id: Int): Item? {
-        return items.firstOrNull { it.id == id }
+    override fun findById(id: UUID): Item? {
+        return items[id]
     }
 }
