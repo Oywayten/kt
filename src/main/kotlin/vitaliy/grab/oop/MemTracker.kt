@@ -4,13 +4,12 @@ import java.util.*
 
 class MemTracker : Store {
 
-    val items = hashMapOf<UUID, Item>()
+    private val items = hashMapOf<UUID, Item>()
 
     override fun add(item: Item): Item {
+        require(items[item.id] == null) { "Item with id ${item.id} already exists" }
         items[item.id] = item
-        val added = items[item.id]
-        require(added != null)
-        return added
+        return item
     }
 
     override fun update(item: Item): Boolean {
@@ -20,14 +19,7 @@ class MemTracker : Store {
             return false
         }
 
-        if (currentItem.name != item.name) {
-            currentItem.name = item.name
-        }
-
-        if (currentItem.created.equals(item.created)) {
-            currentItem.created = item.created
-        }
-
+        items[item.id] = item
         return true
     }
 
@@ -43,7 +35,7 @@ class MemTracker : Store {
     override fun findByName(name: String): List<Item> {
         val list = arrayListOf<Item>()
 
-        for ((_, item ) in items) {
+        for ((_, item) in items) {
             if (item.name == name) {
                 list.add(item)
             }

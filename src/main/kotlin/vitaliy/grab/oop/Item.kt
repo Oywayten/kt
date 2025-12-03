@@ -4,7 +4,7 @@ import java.time.OffsetDateTime
 import java.util.UUID
 
 data class Item(
-    var id: UUID = UUID.randomUUID(),
-    var name: String,
-    var created: OffsetDateTime = OffsetDateTime.now()
+    val id: UUID = UUID.randomUUID(),
+    val name: String,
+    val created: OffsetDateTime
 )
