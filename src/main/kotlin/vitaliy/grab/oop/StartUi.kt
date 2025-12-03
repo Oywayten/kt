@@ -31,11 +31,11 @@ fun main() {
         ExitAction(output)
     )
 
-    StartUi(output).init(input, tracker, actions)
+    init(output, input, tracker, actions)
 
 }
 
-class MenuDemonstrator private constructor(){
+class MenuDemonstrator private constructor() {
     companion object {
         fun showMenu(actions: List<MenuAction>) {
             println("Menu")
