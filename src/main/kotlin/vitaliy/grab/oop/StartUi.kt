@@ -4,7 +4,6 @@ import vitaliy.grab.oop.action.AddItemAction
 import vitaliy.grab.oop.action.ExitAction
 import vitaliy.grab.oop.action.GetAllItemsAction
 import vitaliy.grab.oop.action.MenuAction
-import kotlin.system.exitProcess
 
 class StartUi(val output: Output) {
 
@@ -21,8 +20,6 @@ class StartUi(val output: Output) {
             val action = actions.get(select)
             run = action.execute(input, tracker)
         }
-
-        exitProcess(0)
     }
 
     private fun showMenu(actions: List<MenuAction>) {
