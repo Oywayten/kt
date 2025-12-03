@@ -9,6 +9,6 @@ class Student(
     override fun toString(): String =
         "Student { name = $name, surname = $surname, phone = $phone, email = $email }"
 
-    fun show() =
+    fun show():Unit =
         println(toString())
 }
