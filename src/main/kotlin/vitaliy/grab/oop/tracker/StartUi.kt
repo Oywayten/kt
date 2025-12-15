@@ -1,9 +1,9 @@
-package vitaliy.grab.oop
+package vitaliy.grab.oop.tracker
 
-import vitaliy.grab.oop.action.AddItemAction
-import vitaliy.grab.oop.action.ExitAction
-import vitaliy.grab.oop.action.GetAllItemsAction
-import vitaliy.grab.oop.action.MenuAction
+import vitaliy.grab.oop.tracker.action.AddItemAction
+import vitaliy.grab.oop.tracker.action.ExitAction
+import vitaliy.grab.oop.tracker.action.GetAllItemsAction
+import vitaliy.grab.oop.tracker.action.MenuAction
 
 fun init(output: Output, input: Input, tracker: Store, actions: List<MenuAction>) {
     var run = true

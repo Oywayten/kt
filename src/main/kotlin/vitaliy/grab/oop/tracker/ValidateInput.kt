@@ -1,4 +1,4 @@
-package vitaliy.grab.oop
+package vitaliy.grab.oop.tracker
 
 class ValidateInput(private val out: Output, private val `in`: Input) : Input {
     override fun askStr(question: String?): String? {

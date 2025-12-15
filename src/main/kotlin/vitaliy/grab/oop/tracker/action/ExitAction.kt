@@ -1,8 +1,8 @@
-package vitaliy.grab.oop.action
+package vitaliy.grab.oop.tracker.action
 
-import vitaliy.grab.oop.Input
-import vitaliy.grab.oop.Output
-import vitaliy.grab.oop.Store
+import vitaliy.grab.oop.tracker.Input
+import vitaliy.grab.oop.tracker.Output
+import vitaliy.grab.oop.tracker.Store
 
 class ExitAction(val output: Output) : MenuAction {
 
