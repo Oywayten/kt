@@ -18,3 +18,7 @@ fun max(first: Int, second: Int, third: Int): Int {
     val max: Int = max(second, third)
     return if (first > max) first else max
 }
+
+val decr: Int.() -> Int = {this - 1}
+
+val square: Int.() -> Int = {this * this}

@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.TestInstance
 import org.junit.jupiter.params.ParameterizedTest
 import org.junit.jupiter.params.provider.Arguments
+import org.junit.jupiter.params.provider.Arguments.arguments
 import org.junit.jupiter.params.provider.MethodSource
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
@@ -167,5 +168,50 @@ class CalcTest {
             Arguments.of(-4, 2, -22, 2)
         )
     }
+
+    @ParameterizedTest
+    @MethodSource("decrementTestDataProvider")
+    fun whenDecrement(src: Int, result: Int, expected: Boolean) {
+        assertThat(src.decr() == result).isEqualTo(expected)
+    }
+
+    fun decrementTestDataProvider(): List<Arguments> =
+        listOf(
+            arguments(1, 0, true),
+            arguments(5, 4, true),
+            arguments(0, -1, true),
+            arguments(-3, -4, true),
+            arguments(1000, 999, true),
+
+            arguments(1, 1, false),
+            arguments(10, 100, false),
+            arguments(-3, -2, false),
+            arguments(0, -0, false)
+        )
+
+    @ParameterizedTest
+    @MethodSource("squareTestDataProvider")
+    fun whenSquare(src: Int, result: Int, expected: Boolean) {
+        assertThat(src.square() == result).isEqualTo(expected)
+    }
+
+    fun squareTestDataProvider(): List<Arguments> =
+        listOf(
+            arguments(1, 1, true),
+            arguments(-1, 1, true),
+            arguments(-2, 4, true),
+            arguments(2, 4, true),
+            arguments(5, 25, true),
+            arguments(0, 0, true),
+            arguments(-0, 0, true),
+            arguments(-0, -0, true),
+            arguments(-3, 9, true),
+            arguments(1000, 1_000_000, true),
+
+            arguments(0, 1, false),
+            arguments(10, 10, false),
+            arguments(-3, -9, false),
+            arguments(-1, 0, false)
+        )
 
 }
