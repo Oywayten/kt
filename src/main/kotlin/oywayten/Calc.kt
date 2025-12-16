@@ -1,4 +1,4 @@
-package vitaliy.grab
+package oywayten
 
 fun add(first: Int, second: Int): Int {
     return first + second

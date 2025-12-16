@@ -1,4 +1,4 @@
-package vitaliy.grab
+package oywayten
 
 fun main() {
     println("Hello from Kotlin")
