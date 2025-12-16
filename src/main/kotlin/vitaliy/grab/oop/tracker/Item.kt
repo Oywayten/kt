@@ -1,10 +1,12 @@
 package vitaliy.grab.oop.tracker
 
 import java.time.OffsetDateTime
-import java.util.UUID
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 
+@OptIn(ExperimentalUuidApi::class)
 data class Item(
-    val id: UUID = UUID.randomUUID(),
+    var id: Uuid? = null,
     val name: String,
     val created: OffsetDateTime
 )
