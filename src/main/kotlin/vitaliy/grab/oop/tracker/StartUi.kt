@@ -22,8 +22,8 @@ fun init(output: Output, input: Input, tracker: Store, actions: List<MenuAction>
 
 
 fun main() {
-    val output: Output = ConsoleOutput()
-    val input: Input = ValidateInput(output, ConsoleInput())
+    val output = ConsoleOutput()
+    val input = ValidateInput(output, ConsoleInput())
     val tracker = MemTracker()
     val actions = listOf(
         AddItemAction(output),
