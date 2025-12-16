@@ -3,19 +3,18 @@ package vitaliy.grab
 fun draw(size: Int): String {
     validate(size)
 
-    val sb = StringBuilder()
-    for (i in 0 until size) {
-        for (j in 0 until size) {
-            val x: Char = if (j == i || i == size - j - 1) 'X' else ' '
-            sb.append(x)
-        }
+    return buildString {
+        repeat(size) { i ->
+            repeat(size) { j ->
+                val x: Char = if (j == i || i == size - j - 1) 'X' else ' '
+                append(x)
+            }
 
-        if (i < size - 1) {
-            sb.appendLine()
+            if (i < size - 1) {
+                appendLine()
+            }
         }
     }
-
-    return sb.toString()
 }
 
 private fun validate(size: Int) =
