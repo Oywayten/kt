@@ -1,4 +1,4 @@
-package vitaliy.grab
+package oywayten
 
 fun draw(size: Int): String {
     validate(size)

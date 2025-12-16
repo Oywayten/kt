@@ -3,7 +3,7 @@ plugins {
     id("io.gitlab.arturbosch.detekt") version "1.23.8"
 }
 
-group = "vitaliy.grab"
+group = "oywayten"
 version = "1.0-SNAPSHOT"
 
 repositories {

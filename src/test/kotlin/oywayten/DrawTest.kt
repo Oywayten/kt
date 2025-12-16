@@ -1,4 +1,4 @@
-package vitaliy.grab
+package oywayten
 
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
