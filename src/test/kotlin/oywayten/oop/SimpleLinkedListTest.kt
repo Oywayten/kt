@@ -1,4 +1,6 @@
-package vitaliy.grab.oop
+@file:Suppress("unused")
+
+package oywayten.oop
 
 import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy

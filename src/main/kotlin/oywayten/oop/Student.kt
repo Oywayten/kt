@@ -1,4 +1,4 @@
-package vitaliy.grab.oop
+package oywayten.oop
 
 class Student(
     var name: String = "not_specified",

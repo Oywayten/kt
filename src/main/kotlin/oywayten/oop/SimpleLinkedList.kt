@@ -1,4 +1,4 @@
-package vitaliy.grab.oop
+package oywayten.oop
 
 fun <T> emptySimpleLinkedList(): SimpleLinkedList<T> = SimpleLinkedList()
 

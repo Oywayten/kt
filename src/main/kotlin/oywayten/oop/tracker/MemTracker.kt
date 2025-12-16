@@ -1,4 +1,4 @@
-package vitaliy.grab.oop.tracker
+package oywayten.oop.tracker
 
 import kotlin.uuid.ExperimentalUuidApi
 import kotlin.uuid.Uuid

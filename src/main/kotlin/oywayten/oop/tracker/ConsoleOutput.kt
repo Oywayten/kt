@@ -1,4 +1,4 @@
-package vitaliy.grab.oop.tracker
+package oywayten.oop.tracker
 
 class ConsoleOutput : Output {
     override fun println(obj: Any?) {

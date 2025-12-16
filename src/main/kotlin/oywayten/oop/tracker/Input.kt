@@ -1,4 +1,4 @@
-package vitaliy.grab.oop.tracker
+package oywayten.oop.tracker
 
 interface Input {
     fun askStr(question: String?): String?

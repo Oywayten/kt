@@ -1,4 +1,4 @@
-package vitaliy.grab.oop.tracker
+package oywayten.oop.tracker
 
 import java.time.OffsetDateTime
 import kotlin.uuid.ExperimentalUuidApi
