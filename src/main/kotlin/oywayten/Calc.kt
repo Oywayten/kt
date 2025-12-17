@@ -19,14 +19,16 @@ fun max(first: Int, second: Int, third: Int): Int {
     return if (first > max) first else max
 }
 
-val decr: Int.() -> Int = {this - 1}
+val decr: Int.() -> Int = { this - 1 }
 
-val square: Int.() -> Int = {this * this}
+val square: Int.() -> Int = { this * this }
 
 fun sum(list: List<Int>): Int {
     return list
         .asSequence()
-        .filter { it % 2 == 1}
-        .map { it + 1}
+        .filter { it % 2 == 1 }
+        .map { it + 1 }
         .sum()
 }
+
+val add: (Int, Int) -> Int = { left, right -> left + right }
