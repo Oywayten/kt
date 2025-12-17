@@ -1,4 +1,4 @@
-package oywayten
+package oywayten.oop
 
 class HtmlTable {
     fun create(row: Int, cell: Int): String {
