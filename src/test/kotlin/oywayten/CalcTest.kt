@@ -214,4 +214,25 @@ class CalcTest {
             arguments(-1, 0, false)
         )
 
+    @ParameterizedTest
+    @MethodSource("countTestDataProvider")
+    fun whenSumIsExpected(list: List<Int>, expected: Int) {
+        assertThat(sum(list)).isEqualTo(expected)
+    }
+
+    private fun countTestDataProvider(): List<Arguments> =
+        listOf(
+            arguments(listOf(1, 1, 1, 1), 8),
+            arguments(listOf(1, 2, 3, 4, 5), 12),
+            arguments(listOf(2, 4, 6), 0),
+            arguments(listOf<Int>(), 0),
+            arguments(listOf(25, 2), 26)
+        )
+
+    @Test
+    fun whenSumIsNotExpected() {
+        val ints = listOf(1, 2, 3)
+        assertThat(sum(ints)).isNotEqualTo(9)
+    }
+
 }

@@ -22,3 +22,11 @@ fun max(first: Int, second: Int, third: Int): Int {
 val decr: Int.() -> Int = {this - 1}
 
 val square: Int.() -> Int = {this * this}
+
+fun sum(list: List<Int>): Int {
+    return list
+        .asSequence()
+        .filter { it % 2 == 1}
+        .map { it + 1}
+        .sum()
+}
