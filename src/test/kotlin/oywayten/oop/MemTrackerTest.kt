@@ -1,6 +1,5 @@
 package oywayten.oop
 
-import org.assertj.core.api.Assertions.assertThat
 import org.assertj.core.api.Assertions.assertThatThrownBy
 import org.assertj.core.api.SoftAssertions
 import oywayten.oop.tracker.Item
@@ -28,8 +27,8 @@ class MemTrackerTest {
         val added = tracker.add(item)
 
         SoftAssertions.assertSoftly {
-            assertThat(added).isNotNull()
-            assertThat(added).isEqualTo(item)
+            it.assertThat(added).isNotNull()
+            it.assertThat(added).isEqualTo(item)
         }
     }
 
@@ -51,8 +50,8 @@ class MemTrackerTest {
 
         val result = tracker.findById(added.id)
         SoftAssertions.assertSoftly {
-            assertThat(bug).isEqualTo(added)
-            assertThat(result).isEqualTo(added)
+            it.assertThat(bug).isEqualTo(added)
+            it.assertThat(result).isEqualTo(added)
         }
     }
 
@@ -65,8 +64,8 @@ class MemTrackerTest {
 
         val items: List<Item> = tracker.findAll()
         SoftAssertions.assertSoftly {
-            assertThat(items.size).isEqualTo(2)
-            assertThat(items).containsExactlyInAnyOrder(first, second)
+            it.assertThat(items.size).isEqualTo(2)
+            it.assertThat(items).containsExactlyInAnyOrder(first, second)
         }
     }
 
@@ -82,8 +81,8 @@ class MemTrackerTest {
 
         val result: List<Item> = tracker.findByName(second.name)
         SoftAssertions.assertSoftly {
-            assertThat(result.size).isEqualTo(2)
-            assertThat(result[1].name).isEqualTo(second.name)
+            it.assertThat(result.size).isEqualTo(2)
+            it.assertThat(result[1].name).isEqualTo(second.name)
         }
     }
 
@@ -97,8 +96,8 @@ class MemTrackerTest {
         val item: Item? = tracker.findById(id)
 
         SoftAssertions.assertSoftly {
-            assertThat(update).isTrue
-            assertThat(item?.name).isEqualTo("Bug with description")
+            it.assertThat(update).isTrue
+            it.assertThat(item?.name).isEqualTo("Bug with description")
         }
     }
 
@@ -109,8 +108,8 @@ class MemTrackerTest {
 
         val delete = tracker.delete(bug)
         SoftAssertions.assertSoftly {
-            assertThat(delete).isTrue
-            assertThat(tracker.findById(bug.id)).isNull()
+            it.assertThat(delete).isTrue
+            it.assertThat(tracker.findById(bug.id)).isNull()
         }
     }
 }
