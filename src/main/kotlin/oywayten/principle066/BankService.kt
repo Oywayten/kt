@@ -16,10 +16,12 @@ class BankService {
         users.keys.firstOrNull { it.passport == passport }
 
     fun findByRequisite(passport: String, requisite: String): Account? =
-        users[findByPassport(passport)]?.firstOrNull { it.requisite == requisite }
+        findByPassport(passport).let { user ->
+            users[user]?.firstOrNull { it.requisite == requisite }
+        }
 
     fun addAccount(passport: String, account: Account) {
-        users[findByPassport(passport)]?.add(account)
+        findByPassport(passport).let { users[it]?.add(account) }
     }
 
     fun transferMoney(
