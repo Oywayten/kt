@@ -42,6 +42,7 @@ class StockTest {
     }
 
     @Test
+    @Suppress("EqualsNullCall")
     fun equalsNonNull() {
         assertThat(stockX.equals(null)).isFalse
     }
