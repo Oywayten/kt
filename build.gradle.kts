@@ -10,11 +10,19 @@ repositories {
     mavenCentral()
 }
 
+val postgresqlVersion = "42.7.3"
+val junitVersion = "6.0.1"
+val assertjVersion = "3.24.2"
+val h2Version = "2.4.240"
+
 dependencies {
+    runtimeOnly("org.postgresql:postgresql:$postgresqlVersion")
+
     testImplementation(kotlin("test"))
-    testImplementation("org.junit.jupiter:junit-jupiter-engine:6.0.1")
-    testImplementation("org.assertj:assertj-core:3.24.2")
-    testImplementation("org.junit.jupiter:junit-jupiter-params:6.0.1")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:$junitVersion")
+    testImplementation("org.assertj:assertj-core:$assertjVersion")
+    testImplementation("org.junit.jupiter:junit-jupiter-params:$junitVersion")
+    testImplementation("com.h2database:h2:$h2Version")
 }
 
 tasks.test {
