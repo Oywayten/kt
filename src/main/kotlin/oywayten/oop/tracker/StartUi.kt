@@ -5,7 +5,7 @@ import oywayten.oop.tracker.action.ExitAction
 import oywayten.oop.tracker.action.GetAllItemsAction
 import oywayten.oop.tracker.action.MenuAction
 
-fun init(output: Output, input: Input, tracker: Store, actions: List<MenuAction>) {
+fun init(output: Output, input: Input, tracker: Store<Item>, actions: List<MenuAction>) {
     var run = true
     while (run) {
         MenuDemonstrator.showMenu(actions)
@@ -15,7 +15,7 @@ fun init(output: Output, input: Input, tracker: Store, actions: List<MenuAction>
             continue
         }
 
-        val action = actions.get(select)
+        val action = actions[select]
         run = action.execute(input, tracker)
     }
 }

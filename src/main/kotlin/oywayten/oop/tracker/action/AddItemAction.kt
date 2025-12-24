@@ -17,10 +17,10 @@ class AddItemAction(val output: Output) : MenuAction {
         return description
     }
 
-    override fun execute(input: Input, tracker: Store): Boolean {
+    override fun execute(input: Input, tracker: Store<Item>): Boolean {
         output.println("=== Create a new Item ====")
         val name = input.askStr("Enter name: ")
-        val item = Item(Uuid.random(), name ?: "", OffsetDateTime.now())
+        val item = Item(Uuid.random().toString(), name ?: "", OffsetDateTime.now())
         tracker.add(item)
         return true
     }

@@ -1,12 +1,15 @@
 package oywayten.oop.tracker
 
 import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
 
 @OptIn(ExperimentalUuidApi::class)
-class MemTracker : Store {
+class MemTracker : Store<Item> {
 
-    private val items = hashMapOf<Uuid?, Item>()
+    private val items = hashMapOf<String, Item>()
+
+    companion object {
+        val tracker = MemTracker()
+    }
 
     override fun add(item: Item): Item {
         require(item.id !in items) {
@@ -41,7 +44,7 @@ class MemTracker : Store {
             .filter { name == it.name }
     }
 
-    override fun findById(id: Uuid?): Item? {
+    override fun findById(id: String): Item? {
         return items[id]
     }
 }

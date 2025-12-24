@@ -1,14 +1,13 @@
 package oywayten.oop.tracker
 
 import kotlin.uuid.ExperimentalUuidApi
-import kotlin.uuid.Uuid
 
 @OptIn(ExperimentalUuidApi::class)
-interface Store {
-    fun add(item: Item): Item
-    fun update(item: Item): Boolean
-    fun delete(item: Item): Boolean
-    fun findAll(): List<Item>
-    fun findByName(name: String): List<Item>
-    fun findById(id: Uuid?): Item?
+interface Store<T> {
+    fun add(item: T): T
+    fun update(item: T): Boolean
+    fun delete(item: T): Boolean
+    fun findAll(): List<T>
+    fun findByName(name: String): List<T>
+    fun findById(id: String): T?
 }

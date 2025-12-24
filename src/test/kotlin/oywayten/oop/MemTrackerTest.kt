@@ -14,7 +14,7 @@ import kotlin.uuid.Uuid
 @OptIn(ExperimentalUuidApi::class)
 class MemTrackerTest {
 
-    lateinit var tracker: Store
+    lateinit var tracker: Store<Item>
 
     @BeforeTest
     fun setUp() {
@@ -23,7 +23,7 @@ class MemTrackerTest {
 
     @Test
     fun whenAddNewItemThenTrackerHasSameItem() {
-        val item = Item(Uuid.random(), "Test1", OffsetDateTime.now())
+        val item = Item(Uuid.random().toString(), "Test1", OffsetDateTime.now())
         val added = tracker.add(item)
 
         SoftAssertions.assertSoftly {
@@ -34,7 +34,7 @@ class MemTrackerTest {
 
     @Test
     fun whenAddAndIdAlreadyExistsThenIllegalArgumentException() {
-        val id = Uuid.random()
+        val id = Uuid.random().toString()
         val item = Item(id, "Test1", OffsetDateTime.now())
         tracker.add(item)
 
@@ -45,7 +45,7 @@ class MemTrackerTest {
 
     @Test
     fun whenTestFindById() {
-        val bug = Item(Uuid.random(), "Bug", OffsetDateTime.now())
+        val bug = Item(Uuid.random().toString(), "Bug", OffsetDateTime.now())
         val added = tracker.add(bug)
 
         val result = tracker.findById(added.id)
@@ -57,8 +57,8 @@ class MemTrackerTest {
 
     @Test
     fun whenTestFindAll() {
-        val first = Item(Uuid.random(), "First", OffsetDateTime.now())
-        val second = Item(Uuid.random(), "Second", OffsetDateTime.now())
+        val first = Item(Uuid.random().toString(), "First", OffsetDateTime.now())
+        val second = Item(Uuid.random().toString(), "Second", OffsetDateTime.now())
         tracker.add(first)
         tracker.add(second)
 
@@ -71,13 +71,13 @@ class MemTrackerTest {
 
     @Test
     fun whenTestFindByNameCheckSecondItemName() {
-        val first = Item(Uuid.random(), "First", OffsetDateTime.now())
-        val second = Item(Uuid.random(), "Second", OffsetDateTime.now())
+        val first = Item(Uuid.random().toString(), "First", OffsetDateTime.now())
+        val second = Item(Uuid.random().toString(), "Second", OffsetDateTime.now())
         tracker.add(first)
         tracker.add(second)
-        tracker.add(Item(Uuid.random(), "First", OffsetDateTime.now()))
-        tracker.add(Item(Uuid.random(), "Second", OffsetDateTime.now()))
-        tracker.add(Item(Uuid.random(), "First", OffsetDateTime.now()))
+        tracker.add(Item(Uuid.random().toString(), "First", OffsetDateTime.now()))
+        tracker.add(Item(Uuid.random().toString(), "Second", OffsetDateTime.now()))
+        tracker.add(Item(Uuid.random().toString(), "First", OffsetDateTime.now()))
 
         val result: List<Item> = tracker.findByName(second.name)
         SoftAssertions.assertSoftly {
@@ -88,7 +88,7 @@ class MemTrackerTest {
 
     @Test
     fun whenReplace() {
-        val bug = Item(Uuid.random(), "Bug", OffsetDateTime.now())
+        val bug = Item(Uuid.random().toString(), "Bug", OffsetDateTime.now())
         tracker.add(bug)
         val id = bug.id
         val bugWithDesc = Item(id, "Bug with description", OffsetDateTime.now())
@@ -103,7 +103,7 @@ class MemTrackerTest {
 
     @Test
     fun whenDelete() {
-        val bug = Item(Uuid.random(), "Bug", OffsetDateTime.now())
+        val bug = Item(Uuid.random().toString(), "Bug", OffsetDateTime.now())
         tracker.add(bug)
 
         val delete = tracker.delete(bug)

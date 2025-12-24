@@ -1,6 +1,7 @@
 package oywayten.oop.tracker.action
 
 import oywayten.oop.tracker.Input
+import oywayten.oop.tracker.Item
 import oywayten.oop.tracker.Output
 import oywayten.oop.tracker.Store
 
@@ -12,7 +13,7 @@ class GetAllItemsAction(val output: Output) : MenuAction {
         return description
     }
 
-    override fun execute(input: Input, tracker: Store): Boolean {
+    override fun execute(input: Input, tracker: Store<Item>): Boolean {
         output.println("=== Show all items ===")
         val items = tracker.findAll()
         if (items.isNotEmpty()) {
