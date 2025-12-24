@@ -607,18 +607,6 @@
     <inspection_tool class="NestingDepth" enabled="true" level="WARNING" enabled_by_default="true">
       <option name="m_limit" value="6" />
     </inspection_tool>
-    <inspection_tool class="NewGroovyClassNamingConvention" enabled="true" level="WARNING" enabled_by_default="true">
-      <extension name="JUnitAbstractTestClassNamingConvention" enabled="true">
-        <option name="m_regex" value="([A-Z][a-z]+)+TestCase" />
-        <option name="m_minLength" value="12" />
-        <option name="m_maxLength" value="29" />
-      </extension>
-      <extension name="JUnitTestClassNamingConvention" enabled="true">
-        <option name="m_regex" value="([A-Z][A-Za-z]+)+Test" />
-        <option name="m_minLength" value="9" />
-        <option name="m_maxLength" value="34" />
-      </extension>
-    </inspection_tool>
     <inspection_tool class="NewInstanceOfSingleton" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="NoButtonGroup" enabled="false" level="WARNING" enabled_by_default="false" />
     <inspection_tool class="NoLabelFor" enabled="false" level="WARNING" enabled_by_default="false" />
