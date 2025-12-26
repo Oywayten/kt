@@ -1,6 +1,8 @@
 package oywayten
 
 import org.assertj.core.api.Assertions.assertThat
+import org.junit.jupiter.api.assertThrows
+import java.sql.SQLException
 import kotlin.test.Test
 
 class SqlExecutorTest {
@@ -17,5 +19,16 @@ class SqlExecutorTest {
             \[sql] End of script execute: \d{1,3} ms
         """.trimIndent()
         assertThat(actual).containsPattern(expected)
+    }
+
+    @Test
+    fun whenSqlInvalidThenThrowSqlException() {
+        val sqlExecutor = SqlExecutor()
+        val jdbcURL = "jdbc:h2:mem:test"
+        sqlExecutor.init(jdbcURL)
+        assertThrows<SQLException> {
+            sqlExecutor.exec("invalid select 1")
+        }
+
     }
 }
