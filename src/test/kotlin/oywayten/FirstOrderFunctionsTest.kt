@@ -28,8 +28,8 @@ class FirstOrderFunctionsTest {
     @ParameterizedTest
     @MethodSource("whenOperationDataProvider")
     fun whenOperationIsExpected(name: String, left: Double, rigth: Double, expected: Double) {
-        val result = operation(name)(left, rigth)
-        val format = formatter.format(result)
+        val operationClosure = operation(name)
+        val format = formatter.format(operationClosure(left, rigth))
         println(format)
         val actual = format.toDouble()
         assertThat(actual).isEqualTo(expected)
