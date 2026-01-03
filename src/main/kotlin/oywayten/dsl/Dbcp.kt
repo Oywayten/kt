@@ -1,60 +1,15 @@
 package oywayten.dsl
 
 import org.apache.commons.dbcp2.BasicDataSource
+import oywayten.dsl.Dbcp.Builder.credential
+import oywayten.dsl.Dbcp.Builder.driverClassName
+import oywayten.dsl.Dbcp.Builder.maxIdle
+import oywayten.dsl.Dbcp.Builder.maxOpenPreparedStatements
+import oywayten.dsl.Dbcp.Builder.minIdle
 import oywayten.dsl.Dbcp.Builder.poolOf
+import oywayten.dsl.Dbcp.Builder.url
 
 class Dbcp private constructor() : BasicDataSource() {
-
-    companion object Builder {
-        private var driverClassName: String = ""
-        private var url: String = ""
-        private var userName: String = ""
-        private var password: String = ""
-        private var minIdle: Int = 0
-        private var maxIdle: Int = 0
-        private var maxOpenPreparedStatements: Int = 0
-
-        fun driverClassName(supplier: () -> String) {
-            driverClassName = supplier()
-        }
-
-        fun url(supplier: () -> String) {
-            url = supplier()
-        }
-
-        fun userName(supplier: () -> String) {
-            userName = supplier()
-        }
-
-        fun password(supplier: () -> String) {
-            password = supplier()
-        }
-
-        fun minIdle(supplier: () -> Int) {
-            this.minIdle = supplier()
-        }
-
-        fun maxIdle(supplier: () -> Int) {
-            this.maxIdle = supplier()
-        }
-
-        fun maxOpenPreparedStatements(supplier: () -> Int) {
-            this.maxOpenPreparedStatements = supplier()
-        }
-
-        fun build(): Dbcp = Dbcp().apply {
-            driverClassName = Dbcp.driverClassName
-            url = Dbcp.url
-            username = Dbcp.userName
-            password = Dbcp.password
-            minIdle = Dbcp.minIdle
-            maxIdle = Dbcp.maxIdle
-            maxOpenPreparedStatements = Dbcp.maxOpenPreparedStatements
-        }
-
-        fun poolOf(body: Builder.() -> Dbcp): Dbcp =
-            body()
-    }
 
 
     override fun toString(): String {
@@ -71,6 +26,54 @@ class Dbcp private constructor() : BasicDataSource() {
         }
     }
 
+    companion object Builder {
+        var driverClass: String = ""
+        var url: String = ""
+        var username: String = ""
+        var password: String = ""
+        var minIdle: Int = 0
+        var maxIdle: Int = 0
+        var maxOpenPreparedStatements: Int = 0
+
+        fun poolOf(builderBody: Dbcp.() -> Unit): Dbcp = Dbcp().apply {
+            builderBody()
+        }.setFromBuilder()
+
+
+        fun driverClassName(supplier: () -> String) {
+            driverClass = supplier()
+        }
+
+        fun url(supplier: () -> String) {
+            url = supplier()
+        }
+
+        fun credential(body: Builder.() -> Unit) {
+            body(this)
+        }
+
+        fun minIdle(supplier: () -> Int) {
+            this.minIdle = supplier()
+        }
+
+        fun maxIdle(supplier: () -> Int) {
+            this.maxIdle = supplier()
+        }
+
+        fun maxOpenPreparedStatements(supplier: () -> Int) {
+            this.maxOpenPreparedStatements = supplier()
+        }
+
+        fun Dbcp.setFromBuilder(): Dbcp = apply {
+            driverClassName = Builder.driverClass
+            url = Builder.url
+            username = Builder.username
+            password = Builder.password
+            minIdle = Builder.minIdle
+            maxIdle = Builder.maxIdle
+            maxOpenPreparedStatements = Builder.maxOpenPreparedStatements
+        }
+    }
 
 }
 
@@ -78,14 +81,12 @@ class Dbcp private constructor() : BasicDataSource() {
 @Suppress("MagicNumber")
 fun main() {
     val pool: Dbcp = poolOf {
-        driverClassName { "org.postgres.Driver" }
+        driverClassName { "org.db.CustomDriver" }
         url { "localhost" }
-        userName { "postgres" }
-        password { "password" }
+        credential { password = "postgres"; username = "postgres" }
         minIdle { 5 }
         maxIdle { 10 }
         maxOpenPreparedStatements { 100 }
-        build()
     }
 
     println(pool)
